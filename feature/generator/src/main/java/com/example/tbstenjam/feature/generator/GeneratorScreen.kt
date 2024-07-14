@@ -10,45 +10,51 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.tbstenjam.core.model.TBSTenText
-import kotlin.random.Random
 
 @Composable
-fun GeneratorScreen() {
-    var text by remember { mutableStateOf(TBSTenText(generateRandomString())) }
+fun GeneratorScreen(
+    viewModel: GeneratorViewModel,
+) {
+    val uiState by viewModel.uiState.collectAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text.value, style = MaterialTheme.typography.headlineMedium)
-        Spacer(modifier = Modifier.height(16.dp))
-        OutlinedButton(onClick = { text = TBSTenText(generateRandomString()) }) {
-            Text("てべすてんを当てろ！")
-        }
-    }
+    GeneratorScreen(
+        uiState = uiState,
+        generate = { viewModel.generate() },
+    )
 }
 
-fun generateRandomString(): String {
-    val characters = listOf("て", "べ", "す")
-    val length = Random.nextInt(3, 8)
-    val middlePart = (1..length).map { characters.random() }.joinToString("")
-    return "て${middlePart}てん"
+@Composable
+private fun GeneratorScreen(
+    uiState: GeneratorViewModel.UiState,
+    generate: () -> Unit,
+) {
+    when (uiState) {
+        is GeneratorViewModel.UiState.Idle -> {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(uiState.text.value, style = MaterialTheme.typography.headlineMedium)
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedButton(onClick = generate) {
+                    Text("てべすてんを当てろ！")
+                }
+            }
+        }
+    }
 }
 
 @Preview
 @Composable
 private fun Preview() {
-    GeneratorScreen()
+    //GeneratorScreen()
 }
