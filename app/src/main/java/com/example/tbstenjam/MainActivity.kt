@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.tbstenjam.core.model.TBSTenText
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LetsTBSten() {
-    var text by remember { mutableStateOf(generateRandomString()) }
+    var text by remember { mutableStateOf(TBSTenText(generateRandomString())) }
 
     Column(
         modifier = Modifier
@@ -43,9 +44,9 @@ fun LetsTBSten() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text, style = MaterialTheme.typography.headlineMedium)
+        Text(text.value, style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedButton(onClick = { text = generateRandomString() }) {
+        OutlinedButton(onClick = { text = TBSTenText(generateRandomString()) }) {
             Text("てべすてんを当てろ！")
         }
     }

@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TBStenJam"
 include(":app")
- 
+include(":core:model")
