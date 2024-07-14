@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.tbstenjam.core.model.TBSTenText
 
 @Composable
 fun GeneratorScreen(
@@ -56,5 +57,8 @@ private fun GeneratorScreen(
 @Preview
 @Composable
 private fun Preview() {
-    //GeneratorScreen()
+    GeneratorScreen(
+        uiState = GeneratorViewModel.UiState.Idle(TBSTenText("てべすてん")),
+        generate = {},
+    )
 }
