@@ -23,3 +23,4 @@ rootProject.name = "TBStenJam"
 include(":app")
 include(":core:model")
 include(":core:data")
+include(":feature:generator")
