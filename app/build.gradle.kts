@@ -53,6 +53,7 @@ android {
 
 dependencies {
     implementation(project(":core:data"))
+    implementation(project(":core:design"))
     implementation(project(":feature:generator"))
 
     implementation(libs.androidx.core.ktx)

@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.tbstenjam.core.design.theme.TBStenJamTheme
 import com.example.tbstenjam.feature.generator.GeneratorScreen
 import com.example.tbstenjam.feature.generator.GeneratorViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,8 +16,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val viewModel: GeneratorViewModel = hiltViewModel()
-            GeneratorScreen(viewModel)
+            TBStenJamTheme {
+                val viewModel: GeneratorViewModel = hiltViewModel()
+                GeneratorScreen(viewModel)
+            }
         }
     }
 }
