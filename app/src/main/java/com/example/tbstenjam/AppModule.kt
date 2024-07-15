@@ -1,5 +1,7 @@
 package com.example.tbstenjam
 
+import com.example.tbstenjam.core.data.tbsten.RandomRepository
+import com.example.tbstenjam.core.data.tbsten.RandomRepositoryImpl
 import com.example.tbstenjam.core.data.tbsten.TBSTenRepository
 import com.example.tbstenjam.core.data.tbsten.TBSTenRepositoryImpl
 import dagger.Binds
@@ -16,4 +18,10 @@ abstract class AppModule {
     abstract fun bindTBSTenRepository(
         impl: TBSTenRepositoryImpl,
     ): TBSTenRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindRandomRepository(
+        impl: RandomRepositoryImpl,
+    ): RandomRepository
 }
